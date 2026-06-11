@@ -4,16 +4,23 @@ Windows-first desktop updater for the Manosaba modpack.
 
 ## Build
 
-Install the .NET 8 SDK, then run:
+Install the .NET 8 SDK, then build the public GitHub variant:
 
 ```powershell
-dotnet publish .\updater\ManosabaUpdater.csproj -c Release -r win-x64 --self-contained false -o .\build\KuiLunUPDater-publish
+dotnet publish .\updater\ManosabaUpdater.csproj -p:PublishProfile=GitHub -p:DefaultManifestUrl=""
 ```
 
-The portable executable will be emitted under:
+Build the personal-server variant by passing the default manifest URL at publish time:
+
+```powershell
+dotnet publish .\updater\ManosabaUpdater.csproj -p:PublishProfile=PersonalServer -p:DefaultManifestUrl="https://download.example.com/manosaba/manifest.json"
+```
+
+The self-contained executable and bundled .NET desktop runtime files will be emitted under:
 
 ```text
-build/KuiLunUPDater-publish/
+build/KuiLunUPDater-GitHub-publish/
+build/KuiLunUPDater-Server-publish/
 ```
 
 ## Runtime Flow
@@ -58,11 +65,13 @@ For the first version, every `downloadUrl` must use HTTPS and the same host as t
 Install Inno Setup, then run:
 
 ```powershell
-iscc .\installer\KuiLunUPDater.iss
+iscc /DPublishDir="..\build\KuiLunUPDater-GitHub-publish" /DSetupFileBaseName="KuiLunUPDater-GitHub-Setup" .\installer\KuiLunUPDater.iss
+iscc /DPublishDir="..\build\KuiLunUPDater-Server-publish" /DSetupFileBaseName="KuiLunUPDater-Server-Setup" .\installer\KuiLunUPDater.iss
 ```
 
 The setup executable will be emitted to:
 
 ```text
-build/KuiLunUPDater-installer/KuiLunUPDater-Setup.exe
+build/KuiLunUPDater-installer/KuiLunUPDater-GitHub-Setup.exe
+build/KuiLunUPDater-installer/KuiLunUPDater-Server-Setup.exe
 ```

@@ -9,5 +9,20 @@
     <AssemblyName>KuiLunUPDater</AssemblyName>
     <RootNamespace>ManosabaUpdater</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSelfContained>true</PublishSelfContained>
+    <DefaultManifestUrl></DefaultManifestUrl>
   </PropertyGroup>
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>DefaultManifestUrl</_Parameter1>
+      <_Parameter2>$(DefaultManifestUrl)</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+  <Target Name="ValidatePersonalServerDefaultManifestUrl"
+          BeforeTargets="Publish"
+          Condition="'$(PublishProfile)' == 'PersonalServer' and '$(DefaultManifestUrl)' == ''">
+    <Error Text="PersonalServer publish requires -p:DefaultManifestUrl=&quot;https://.../manifest.json&quot;." />
+  </Target>
 </Project>

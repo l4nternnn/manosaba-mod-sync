@@ -111,8 +111,8 @@ public partial class MainWindow : Window
                 PercentText.Text = "100%";
                 CurrentFileText.Text = "当前文件：-";
                 RemainingFilesText.Text = "0";
-                DownloadedText.Text = "0 B";
-                RemainingSizeText.Text = "0 B";
+                DownloadedText.Text = UpdaterFormatting.FormatKilobytes(0);
+                RemainingSizeText.Text = UpdaterFormatting.FormatKilobytes(0);
                 SpeedText.Text = "-";
                 SetStatus("已是最新，可以启动游戏。");
                 return;
@@ -155,9 +155,9 @@ public partial class MainWindow : Window
         PercentText.Text = percent + "%";
         CurrentFileText.Text = "当前文件：" + progress.FileName;
         RemainingFilesText.Text = progress.RemainingFiles.ToString();
-        DownloadedText.Text = FormatBytes(progress.DownloadedBytes);
-        RemainingSizeText.Text = FormatBytes(progress.RemainingBytes);
-        SpeedText.Text = FormatBytes(progress.BytesPerSecond) + "/s";
+        DownloadedText.Text = UpdaterFormatting.FormatKilobytes(progress.DownloadedBytes);
+        RemainingSizeText.Text = UpdaterFormatting.FormatKilobytes(progress.RemainingBytes);
+        SpeedText.Text = UpdaterFormatting.FormatKilobytes(progress.BytesPerSecond) + "/s";
     }
 
     private void ResetProgress()
@@ -203,13 +203,4 @@ public partial class MainWindow : Window
         return current.Message;
     }
 
-    private static string FormatBytes(long bytes)
-    {
-        if (bytes < 1024L) return bytes + " B";
-        double kib = bytes / 1024.0;
-        if (kib < 1024.0) return $"{kib:F1} KiB";
-        double mib = kib / 1024.0;
-        if (mib < 1024.0) return $"{mib:F1} MiB";
-        return $"{mib / 1024.0:F1} GiB";
-    }
 }

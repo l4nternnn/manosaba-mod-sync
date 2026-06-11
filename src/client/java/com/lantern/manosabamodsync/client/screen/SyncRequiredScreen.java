@@ -106,10 +106,10 @@ public class SyncRequiredScreen extends Fragment implements ScreenCallback {
 	}
 
 	private String summaryText() {
-		long mib = plan.totalDownloadSize() / 1024L / 1024L;
+		long kb = (plan.totalDownloadSize() + 1023L) / 1024L;
 		return "服务器：" + manifest.packName() + "\n"
 				+ "整合包版本：" + manifest.packVersion() + "\n"
-				+ "需要下载：" + plan.entriesToDownload().size() + " 个文件，共约 " + mib + " MB";
+				+ "需要下载：" + plan.entriesToDownload().size() + " 个文件，共约 " + kb + " KB";
 	}
 
 	private String detailsText() {

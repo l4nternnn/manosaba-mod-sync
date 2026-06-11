@@ -9,13 +9,13 @@ Manosaba Mod Sync 是给 **Minecraft Fabric 1.21.8** 整合包使用的模组一
 - `src/main`：Fabric Mod 通用逻辑、配置、manifest、网络协议与服务端逻辑。
 - `src/client`：游戏内轻量提示入口和旧同步界面的兼容代码。
 - `updater`：Windows 优先的 WPF 独立更新器，产物名为 `KuiLunUPDater.exe`。
-- `installer`：Inno Setup 安装包脚本，产物名为 `KuiLunUPDater-Setup.exe`。
+- `installer`：Inno Setup 安装包脚本，常见产物为 `KuiLunUPDater-GitHub-Setup.exe` 和 `KuiLunUPDater-Server-Setup.exe`。
 - `tools`：manifest 生成脚本，用于扫描本地 `mods` 并生成下载清单。
 
 ## 玩家使用流程
 
-1. 运行 `KuiLunUPDater-Setup.exe` 安装更新器。
-2. 如果安装器提示缺少运行时，请安装 **.NET 8 Desktop Runtime**，不是 SDK，也不是 ASP.NET Core Runtime。
+1. 运行对应版本的 `KuiLunUPDater-*-Setup.exe` 安装更新器。
+2. 安装包已经包含 .NET Desktop Runtime，不需要玩家额外安装运行时。
 3. 打开 `KuiLunUPDater`。
 4. 首次启动时选择游戏目录，也就是包含 `mods/` 文件夹的目录，例如：
 
@@ -143,24 +143,37 @@ nginx -s reload
 .\gradlew.bat build
 ```
 
-构建 WPF 更新器：
+构建 WPF 更新器公共版（不预填 Manifest URL，适合 GitHub 发布）：
 
 ```powershell
-dotnet build .\updater\ManosabaUpdater.csproj -c Release
-dotnet publish .\updater\ManosabaUpdater.csproj -c Release -r win-x64 --self-contained false -o .\build\KuiLunUPDater-publish
+dotnet publish .\updater\ManosabaUpdater.csproj -p:PublishProfile=GitHub -p:DefaultManifestUrl=""
 ```
 
-构建安装包：
+构建 WPF 更新器个人服务器版（预填 Manifest URL，URL 通过命令行传入，不写入仓库）：
 
 ```powershell
-& "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" .\installer\KuiLunUPDater.iss
+dotnet publish .\updater\ManosabaUpdater.csproj -p:PublishProfile=PersonalServer -p:DefaultManifestUrl="https://download.example.com/manosaba/manifest.json"
+```
+
+分别构建安装包：
+
+```powershell
+& "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" /DPublishDir="..\build\KuiLunUPDater-GitHub-publish" /DSetupFileBaseName="KuiLunUPDater-GitHub-Setup" .\installer\KuiLunUPDater.iss
+& "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" /DPublishDir="..\build\KuiLunUPDater-Server-publish" /DSetupFileBaseName="KuiLunUPDater-Server-Setup" .\installer\KuiLunUPDater.iss
+```
+
+也可以用脚本一次生成两个版本：
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tools\Publish-UpdaterVariants.ps1 -PersonalManifestUrl "https://download.example.com/manosaba/manifest.json"
 ```
 
 常见产物：
 
 ```text
 build\libs\manosaba_mod_sync-1.0.2.jar
-build\KuiLunUPDater-installer\KuiLunUPDater-Setup.exe
+build\KuiLunUPDater-installer\KuiLunUPDater-GitHub-Setup.exe
+build\KuiLunUPDater-installer\KuiLunUPDater-Server-Setup.exe
 ```
 
 ## 测试建议
