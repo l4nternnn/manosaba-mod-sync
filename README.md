@@ -155,6 +155,8 @@ dotnet publish .\updater\ManosabaUpdater.csproj -p:PublishProfile=GitHub -p:Defa
 dotnet publish .\updater\ManosabaUpdater.csproj -p:PublishProfile=PersonalServer -p:DefaultManifestUrl="https://download.example.com/manosaba/manifest.json"
 ```
 
+如果是维护者本地构建个人服务器版，真实 Manifest URL 记录在本地 `AGENTS.md` 中；该文件已被 `.gitignore` 忽略，不会提交到公开仓库。
+
 分别构建安装包：
 
 ```powershell
@@ -167,6 +169,8 @@ dotnet publish .\updater\ManosabaUpdater.csproj -p:PublishProfile=PersonalServer
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tools\Publish-UpdaterVariants.ps1 -PersonalManifestUrl "https://download.example.com/manosaba/manifest.json"
 ```
+
+GitHub release 只上传 `KuiLunUPDater-GitHub-Setup.exe`。`KuiLunUPDater-Server-Setup.exe` 仅作为个人服务器版本地构建产物，不上传到 GitHub。
 
 常见产物：
 

@@ -16,6 +16,8 @@ Build the personal-server variant by passing the default manifest URL at publish
 dotnet publish .\updater\ManosabaUpdater.csproj -p:PublishProfile=PersonalServer -p:DefaultManifestUrl="https://download.example.com/manosaba/manifest.json"
 ```
 
+For maintainer-local server builds, keep the real manifest URL in the ignored root `AGENTS.md`; do not write it into tracked source files or public release notes.
+
 The self-contained executable and bundled .NET desktop runtime files will be emitted under:
 
 ```text
@@ -75,3 +77,5 @@ The setup executable will be emitted to:
 build/KuiLunUPDater-installer/KuiLunUPDater-GitHub-Setup.exe
 build/KuiLunUPDater-installer/KuiLunUPDater-Server-Setup.exe
 ```
+
+Upload only `KuiLunUPDater-GitHub-Setup.exe` to GitHub releases. Keep the server installer as a local-only artifact.

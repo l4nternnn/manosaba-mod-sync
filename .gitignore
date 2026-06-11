@@ -25,6 +25,10 @@ obj/
 .classpath
 .project
 
+# local agent notes
+
+AGENTS.md
+
 # macos
 
 *.DS_Store
