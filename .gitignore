@@ -36,6 +36,10 @@ CLAUDE.md
 .mcp.json
 CLAUDE.local.md
 
+# personal deploy script (含服务器凭据，禁止入库)
+
+tools/deploy-manosaba.py
+
 # macos
 
 *.DS_Store
