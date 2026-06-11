@@ -61,6 +61,8 @@ Manosaba Mod Sync 是给 **Minecraft Fabric 1.21.8** 整合包使用的模组一
   mods\.manosaba-updater\backup\yyyyMMdd-HHmmss\
   ```
 
+- 每次「检查并更新」都会按 mod id 去重：同一 mod id 只保留 manifest 列出的那份（按文件名），其余旧版本/重复（如带中文前缀的副本）移至同一 backup 目录。玩家自装 mod（id 不在 manifest 中）不会动。
+
 - 安全校验（任一不满足都会拒绝该条目）：
   - `manifestUrl` 必须是 HTTPS。
   - 每个 `downloadUrl` 必须是 HTTPS，且**域名必须与 manifest 的域名一致**，防止 manifest 被改成任意外部下载源。

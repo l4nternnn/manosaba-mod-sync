@@ -126,6 +126,9 @@ public partial class MainWindow : Window
 
             if (plan.IsComplete)
             {
+                int cleaned = await Task.Run(
+                    () => _updater.CleanDuplicateMods(_settings.GameDirectory, plan.Manifest, _cancellation.Token),
+                    _cancellation.Token);
                 DownloadProgressBar.Value = 100;
                 PercentText.Text = "100%";
                 CurrentFileText.Text = "当前文件：-";
@@ -133,8 +136,14 @@ public partial class MainWindow : Window
                 DownloadedText.Text = UpdaterFormatting.FormatKilobytes(0);
                 RemainingSizeText.Text = UpdaterFormatting.FormatKilobytes(0);
                 SpeedText.Text = "-";
+                if (cleaned > 0)
+                {
+                    AddDetail($"已清理 {cleaned} 个重复/旧版本 mod（移至 backup）。");
+                }
                 SetStatus("已是最新，可以启动游戏。");
-                ShowToast("无需更新", "本地 mods 已经和 manifest 保持一致。");
+                ShowToast("无需更新", cleaned > 0
+                    ? $"本地 mods 已和 manifest 一致，并清理了 {cleaned} 个重复 mod。"
+                    : "本地 mods 已经和 manifest 保持一致。");
                 return;
             }
 
@@ -142,6 +151,13 @@ public partial class MainWindow : Window
             SetStatus($"发现 {plan.EntriesToDownload.Count} 个文件需要更新，正在下载...");
             AddDetail("开始下载缺失或不一致的文件...");
             await _updater.DownloadAsync(_settings.GameDirectory, plan, progress, _cancellation.Token);
+            int removed = await Task.Run(
+                () => _updater.CleanDuplicateMods(_settings.GameDirectory, plan.Manifest, _cancellation.Token),
+                _cancellation.Token);
+            if (removed > 0)
+            {
+                AddDetail($"已清理 {removed} 个重复/旧版本 mod（移至 backup）。");
+            }
             DownloadProgressBar.Value = 100;
             PercentText.Text = "100%";
             SetStatus("更新完成，可以启动游戏。");
