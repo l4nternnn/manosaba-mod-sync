@@ -1,0 +1,44 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <FontFamily x:Key="AppFontFamily">Segoe UI Variable Text, Microsoft YaHei UI, Segoe UI</FontFamily>
+    <FontFamily x:Key="MonoFontFamily">JetBrains Mono, Cascadia Mono, Consolas</FontFamily>
+
+    <SolidColorBrush x:Key="AppBackdropBrush" Color="#EEF2F7"/>
+    <LinearGradientBrush x:Key="ShellBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#FFFFFF" Offset="0"/>
+        <GradientStop Color="#F8FBFF" Offset="0.58"/>
+        <GradientStop Color="#ECF2FA" Offset="1"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="SidebarBrush" Color="#F5F8FC"/>
+    <SolidColorBrush x:Key="SurfaceBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="SurfaceElevatedBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="SurfaceSubtleBrush" Color="#F1F5FA"/>
+    <SolidColorBrush x:Key="SurfaceMutedBrush" Color="#E6EDF6"/>
+    <SolidColorBrush x:Key="CardBorderBrush" Color="#D7E0EC"/>
+    <SolidColorBrush x:Key="CardSoftBorderBrush" Color="#E6EDF6"/>
+
+    <SolidColorBrush x:Key="BodyTextBrush" Color="#111927"/>
+    <SolidColorBrush x:Key="MutedTextBrush" Color="#526173"/>
+    <SolidColorBrush x:Key="SubtleTextBrush" Color="#748295"/>
+    <SolidColorBrush x:Key="InverseTextBrush" Color="#FFFFFF"/>
+
+    <SolidColorBrush x:Key="AccentBrush" Color="#138A63"/>
+    <SolidColorBrush x:Key="AccentStrongBrush" Color="#08734F"/>
+    <SolidColorBrush x:Key="AccentSoftBrush" Color="#DFF7EE"/>
+    <SolidColorBrush x:Key="AccentSubtleBrush" Color="#EDF9F5"/>
+    <SolidColorBrush x:Key="InfoBrush" Color="#526CE0"/>
+    <SolidColorBrush x:Key="InfoSoftBrush" Color="#E7ECFF"/>
+    <SolidColorBrush x:Key="WarningBrush" Color="#A36812"/>
+    <SolidColorBrush x:Key="WarningSoftBrush" Color="#FFF3D9"/>
+    <SolidColorBrush x:Key="DangerBrush" Color="#C24558"/>
+    <SolidColorBrush x:Key="DangerSoftBrush" Color="#FFE8ED"/>
+
+    <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#F5F8FC"/>
+    <SolidColorBrush x:Key="ControlHoverBrush" Color="#EAF0F8"/>
+    <SolidColorBrush x:Key="ControlPressedBrush" Color="#DCE6F2"/>
+    <SolidColorBrush x:Key="ControlDisabledBrush" Color="#E8EEF6"/>
+    <SolidColorBrush x:Key="InputBackgroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="InputFocusBrush" Color="#F7FBFF"/>
+    <SolidColorBrush x:Key="OverlayBrush" Color="#80EDF2F7"/>
+    <SolidColorBrush x:Key="ShadowColorBrush" Color="#617084"/>
+</ResourceDictionary>
