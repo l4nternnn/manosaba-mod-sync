@@ -29,6 +29,13 @@ obj/
 
 AGENTS.md
 
+# claude
+
+CLAUDE.md
+.claude/
+.mcp.json
+CLAUDE.local.md
+
 # macos
 
 *.DS_Store

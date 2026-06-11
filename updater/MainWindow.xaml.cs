@@ -27,6 +27,7 @@ public partial class MainWindow : Window
         LoadSettingsIntoUi();
         _currentPage = OverviewPage;
         NavOverviewButton.IsChecked = true;
+        ThemeToggleButton.IsChecked = ThemeManager.CurrentTheme == AppTheme.Light;
         UpdateCaptionButton();
     }
 

@@ -4,7 +4,7 @@ public static class ThemeManager
 {
     private const string ThemeDictionaryKey = "Manosaba.ActiveThemeDictionary";
 
-    public static AppTheme CurrentTheme { get; private set; } = AppTheme.Dark;
+    public static AppTheme CurrentTheme { get; private set; } = AppTheme.Light;
 
     public static void ApplyTheme(System.Windows.Application application, AppTheme theme)
     {
